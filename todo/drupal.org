@@ -1,0 +1,11 @@
+Drupal:
+* TODO new theme
+  Needs some improvements
+* TODO Home Page
+  Needs some improvement
+* TODO Roles and Users
+  
+* TODO 3 thematic categories
+* TODO Forum / Blog
+* TODO Poll
+* TODO Module development
