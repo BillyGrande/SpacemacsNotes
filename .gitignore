@@ -2,3 +2,16 @@
 *.html
 *.pdf
 *.odt
+*.doc
+*.docx
+*.zip
+*.aux
+*.out
+*.log
+*.bat
+*.toc
+/fonts
+*.reg
+*.delete
+*.png
+*.gz

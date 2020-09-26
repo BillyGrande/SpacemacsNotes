@@ -1,0 +1,5 @@
+[[file:c:/notes/org-roam/20200923214655-test.org][test]]
+
+#+Title: Dummy note
+
+Having a quick input here.

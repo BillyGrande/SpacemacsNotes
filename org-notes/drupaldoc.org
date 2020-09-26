@@ -1,0 +1,284 @@
+#+TITLE: Π16102
+
+#+AUTHOR: Βασίλειος Ξύκης
+* Θέμα Εργασίας
+  :PROPERTIES:
+  :CUSTOM_ID: θέμα-εργασίας
+  :END:
+
+Η εργασία εκπονήθηκε σε drupal 9 και σαν θέμα έχει τα ηλεκτρικά αμάξια
+
+* Τasks
+  :PROPERTIES:
+  :CUSTOM_ID: τasks
+  :END:
+
+** (Theme)
+   :PROPERTIES:
+   :CUSTOM_ID: theme
+   :END:
+
+Χρησιμοποίησα το theme zuvi
+
+[[file:media/image1.png]]
+
+** (Home page)
+   :PROPERTIES:
+   :CUSTOM_ID: home-page
+   :END:
+
+[[file:media/image2.png]]
+
+** (Roles)
+   :PROPERTIES:
+   :CUSTOM_ID: roles
+   :END:
+
+Δημιουργήθηκαν οι κατάλληλοι ρόλοι με τα κατάλληλα δικαιώματα.
+
+[[file:media/image3.png]]
+
+** (Topic categories)
+   :PROPERTIES:
+   :CUSTOM_ID: topic-categories
+   :END:
+
+Δημιουργήθηκαν 3 θεματικές κατηγορίες.
+
+- Η κατηγορία "News", όπου υπάρχουν σχετικά άρθρα σχετικά με την
+  ηλεκτροκίνηση.
+- Η κατηγορία "Test Drives", όπου υπάρχουν reviews για διάφορα ηλεκτρικά
+  αυτοκίνητα.
+- Η κατηγορία "Expos", όπου υπάρχει φωτογραφικό υλικό, σχετικό με
+  εκθέσεις ηλεκτροκίνησης.
+
+** (Communication Tools)
+   :PROPERTIES:
+   :CUSTOM_ID: communication-tools
+   :END:
+
+Δημιουργήθηκε forum και wiki. Στο forum μπορεί να γράψει κάθε
+authenticated χρήστης, στο wiki όποιος χρήστης έχει παραπάνω ρόλο εκτός
+από authenticated.
+
+** (Poll)
+   :PROPERTIES:
+   :CUSTOM_ID: poll
+   :END:
+
+Υπάρχει ένα poll όπου μπορεί να ψηφίσει ο κάθε authenticated χρήστης.
+
+[[file:media/image4.png]]
+
+* Module
+  :PROPERTIES:
+  :CUSTOM_ID: module
+  :END:
+
+** Λειτουργία
+   :PROPERTIES:
+   :CUSTOM_ID: λειτουργία
+   :END:
+
+Το module που ανέπτυξα ονομάζεται announcements και εκτελεί την απλή
+λειτουργία εμφάνισης μιας ανακοίνωσης. Η ανακοίνωση μπορεί να εμφανιστεί
+με 2 τρόπους. Είτε πηγαίνοντας στο path url/announcements είτε με την
+προσθήκη του announcement block σε κάποιο region του site.
+
+** Δομή
+   :PROPERTIES:
+   :CUSTOM_ID: δομή
+   :END:
+
+Η δομή των αρχείων είναι η εξής
+
+[[file:media/image5.png]]
+
+** Αρχεία
+   :PROPERTIES:
+   :CUSTOM_ID: αρχεία
+   :END:
+
+*** announcements.info.yml
+    :PROPERTIES:
+    :CUSTOM_ID: announcements.info.yml
+    :END:
+
+To announcements.info.yml είναι το απαραίτητο αρχείο για την δημιουργεία
+του module. Προσφέρει βασικές και χρήσιμες πληροφόρίες στην πλατφόρμα
+drupal
+
+#+BEGIN_EXAMPLE
+  name: Announcements
+  description: Show the latest admin announcements.
+  package: Custom
+  type: module
+  version: 1.0
+  core_version_requirement: ^8 || ^9
+#+END_EXAMPLE
+
+*** AnnouncementsController.php
+    :PROPERTIES:
+    :CUSTOM_ID: announcementscontroller.php
+    :END:
+
+Το επόμενο αρχείο που θα χρειαστούμε είναι το
+AnnouncementsController.php.
+
+Η συνάρτηση content(), που βρίσκεται στην κλάση AnnouncementsController,
+θα επιστρέψει το μήνυμα που της έχουμε δώσει, όταν επισκεφτούμε το την
+σελίδα announcements.
+
+#+BEGIN_EXAMPLE
+  <?php
+
+  namespace Drupal\announcements\Controller;
+
+  use Drupal\Core\Controller\ControllerBase;
+
+  /**
+   * Defines AnnouncementsController class.
+   */
+  class AnnouncementsController extends ControllerBase {
+
+    /**
+     * Display the markup.
+     *
+     * @return array
+     *   Return markup array.
+     */
+    public function content() {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('Hello, this is an announcement'),
+      ];
+    }
+
+  }
+#+END_EXAMPLE
+
+*** announcements.routing.yml
+    :PROPERTIES:
+    :CUSTOM_ID: announcements.routing.yml
+    :END:
+
+Με το συγκεκριμένο αρχείο ενεργοποιούμε το announcements path.
+
+#+BEGIN_EXAMPLE
+  announcements.content:
+    path: '/announcements'
+    defaults:
+      _controller: '\Drupal\announcements\Controller\AnnouncementsController::content'
+      _title: 'Latest Announcements'
+    requirements:
+      _permission: 'access content'
+#+END_EXAMPLE
+
+*** announcements.links.menu.yml
+    :PROPERTIES:
+    :CUSTOM_ID: announcements.links.menu.yml
+    :END:
+
+Το συγκεκριμένο αρχείο, δημιουγεί ένα link στην ενότητα Development και
+στην θέση Admin>Configuration. To link οδηγεί στο announcements path.
+
+#+BEGIN_EXAMPLE
+  announcements.admin:
+    title: 'Announcements'
+    description: 'admin page'
+    parent: system.admin_config_development
+    route_name: announcements.content
+    weight: 100
+#+END_EXAMPLE
+
+*** AnnouncementsBlock.php
+    :PROPERTIES:
+    :CUSTOM_ID: announcementsblock.php
+    :END:
+
+Το AnnouncementsBlock.php αποσκοπεί στην δημιουργία ενός block όπου
+μπορούμε να το χρησιμοποιήσουμε σε όποιο region θέλουμε. To block μας
+δίνει την δυνατότητα να γράψουμε ότι announcements θέλουμε.
+
+[[file:media/image6.png]]
+
+[[file:media/image7.png]]
+
+#+BEGIN_EXAMPLE
+  <?php
+  namespace Drupal\announcements\Plugin\Block;
+
+  use Drupal\Core\Block\BlockBase;
+  use Drupal\Core\Form\FormStateInterface;
+
+  /**
+   * Provides a 'Announcement' Block
+   *
+   * @Block(
+   *   id = "announcement_block",
+   *   admin_label = @Translation("Announcement block"),
+   * )
+   */
+  class AnnouncementsBlock extends BlockBase {
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build() {
+      $config = $this->getConfiguration();
+
+      if (!empty($config['announcements_block_settings'])) {
+        $announcement = $config['announcements_block_settings'];
+      }
+      else {
+        $announcement = $this->t('Hello, no announcements ');
+      }
+      return array(
+        '#markup' => $this->t('Announcements: @announcement!', array(
+            '@announcement' => $announcement,
+          )
+        ),
+      );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function blockForm($form, FormStateInterface $form_state) {
+      $form = parent::blockForm($form, $form_state);
+
+      $default_config = \Drupal::config('announcements.settings');
+      $config = $this->getConfiguration();
+
+      $form['announcements_block_settings'] = array (
+        '#type' => 'textfield',
+        '#title' => $this->t('Announcement'),
+        '#description' => $this->t('Here you write the announcement you want to make.'),
+        '#default_value' => isset($config['announcements_block_settings']) ? $config['announcements_block_settings'] : $default_config->get('announcements.announcement'),
+      );
+
+      return $form;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function blockSubmit($form, FormStateInterface $form_state) {
+      $this->setConfigurationValue('announcements_block_settings', $form_state->getValue('announcements_block_settings'));
+    }
+  }
+#+END_EXAMPLE
+
+*** announcements.settings.yml
+    :PROPERTIES:
+    :CUSTOM_ID: announcements.settings.yml
+    :END:
+
+Το announcements.settings.yml δεν προσφέρει τίποτα ιδιαίτερο. Περιέχει
+απλώς ένα default μήνυμα για το block, σε περίπτωση που δεν ορίσουμε
+κάποιο εμείς.
+
+#+BEGIN_EXAMPLE
+  announcements:
+    announcement: 'Test announcement'
+#+END_EXAMPLE
