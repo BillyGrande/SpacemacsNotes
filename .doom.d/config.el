@@ -37,13 +37,16 @@
 
 ;;org-roam
 (setq org-roam-directory "C:/notes/org-roam")
+
 (setq org-roam-graph-viewer "C:/Program Files/Graphviz 2.44.1/bin/dot.exe")
+
 ;;(setq org-roam-graph-viewer '(lambda (file) (let ((file-file (concat "file://" file)))
     ;;(call-process "C:/Program Files/Mozilla Firefox/firefox.exe" nil 0 nil file-file))))
 (setq org-roam-graph-viewer "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe")
 (set-language-environment "UTF-8")
-(require 'org-protocol)
-(require 'org-roam-protocol)
+;;(require 'org-protocol)
+;;(require 'org-roam-protocol)
+
 ;;(executable-find "sqlite3")
 ;;(add-to-list 'exec-path "C:/Users/xykei/.emacs.d/sql")
 
@@ -51,20 +54,18 @@
 ;;(require 'simple-httpd)
 ;;(setq httpd-root "/var/www")
 ;;(httpd-start)
-(use-package org-roam-server
-  :ensure t
-  :config
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8080
-        org-roam-server-authenticate nil
-        org-roam-server-export-inline-images t
-        org-roam-server-serve-files nil
-        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20))
+
+(setq org-roam-server-host "127.0.0.1"
+      org-roam-server-port 8080
+      org-roam-server-authenticate nil
+      org-roam-server-export-inline-images t
+      org-roam-server-serve-files nil
+      org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+      org-roam-server-network-poll t
+      org-roam-server-network-arrows nil
+      org-roam-server-network-label-truncate t
+      org-roam-server-network-label-truncate-length 60
+      org-roam-server-network-label-wrap-length 20)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

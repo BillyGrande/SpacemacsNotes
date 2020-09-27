@@ -55,4 +55,3 @@
 ;(unpin! t)
 ;;(package! org-roam :pin "c05368a16b25fc0b044cf84b733fe67746867381")
 (unpin! org-roam)
-(unpin! org-roam-server)
