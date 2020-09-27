@@ -17,6 +17,9 @@
 ;(package! another-package
 ;  :recipe (:host github :repo "username/repo"))
 
+;;(package! org-roam-server
+  ;;:recipe (:host github :repo "org-roam/org-roam-server"))
+
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
 ;; `:files' in the `:recipe':
@@ -52,3 +55,4 @@
 ;(unpin! t)
 ;;(package! org-roam :pin "c05368a16b25fc0b044cf84b733fe67746867381")
 (unpin! org-roam)
+(unpin! org-roam-server)
