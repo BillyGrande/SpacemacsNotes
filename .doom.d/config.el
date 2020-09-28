@@ -89,3 +89,31 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 (add-hook 'window-setup-hook #'toggle-frame-maximized)
+
+
+;;HUNSPELL
+(add-to-list 'exec-path "C:/msys64/mingw64/bin")
+
+(setq ispell-program-name (locate-file "hunspell" exec-path exec-suffixes 'file-executable-p))
+
+(setq ispell-local-dictionary-alist '(
+
+       (nil
+           "[[:alpha:]]"
+           "[^[:alpha:]]"
+           "[']"
+           t
+           ("-d" "el_GR" "-p" "C:\\msys64\\mingw64\\share\\hunspell\\personal.el")
+           nil
+           iso-8859-7)
+
+       ("american"
+           "[[:alpha:]]"
+           "[^[:alpha:]]"
+           "[']"
+           t
+           ("-d" "en_US" "-p" "C:\\msys64\\mingw64\\share\\hunspell\\personal.en")
+           nil
+           iso-8859-1)
+
+))
