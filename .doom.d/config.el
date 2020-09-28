@@ -103,9 +103,9 @@
            "[^[:alpha:]]"
            "[']"
            t
-           ("-d" "el_GR" "-p" "C:\\msys64\\mingw64\\share\\hunspell\\personal.el")
+           ("-d" "en_US" "-p" "C:\\msys64\\mingw64\\share\\hunspell\\personal.en")
            nil
-           iso-8859-7)
+           iso-8859-1)
 
        ("american"
            "[[:alpha:]]"
@@ -115,5 +115,14 @@
            ("-d" "en_US" "-p" "C:\\msys64\\mingw64\\share\\hunspell\\personal.en")
            nil
            iso-8859-1)
+
+       ("greek"
+           "[[:alpha:]]"
+           "[^[:alpha:]]"
+           "[']"
+           t
+           ("-d" "el_GR" "-p" "C:\\msys64\\mingw64\\share\\hunspell\\personal.el")
+           nil
+           iso-8859-7)
 
 ))
