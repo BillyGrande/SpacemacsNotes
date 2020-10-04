@@ -125,4 +125,36 @@
            nil
            iso-8859-7)
 
-))
+       ))
+
+;;Ivy bibtex and org biblography
+
+(setq ivy-re-builders-alist
+      '((ivy-bibtex . ivy--regex-ignore-order)
+        (t . ivy--regex-plus)))
+
+;;minimal ivy-bibtex config
+(setq bibtex-completion-bibliography
+      '("C:/notes/biblography/genesis.bib"
+        "C:/notes/bibliography/genesis.org"
+        ("C:/notes/bibliography/orgtex2.org" . "C:/notes/bibtex-file.bib")))
+
+;;where are the pdfs
+(setq bibtex-completion-library-path '("C:/notes/bibliography/pdfs" "C:/notes/bibliography/extras"))
+
+(setq bibtex-completion-notes-path "C:/notes/bibliography/notes.org")
+
+;;org-ref
+(setq reftex-default-bibliography '("C:/notes/genesis.bib"))
+
+;; see org-ref for use of these variables
+(setq org-ref-bibliography-notes "C:/notes/bibliography/notes.org"
+      org-ref-default-bibliography '("C:/notes/bibliography/genesis.bib")
+      org-ref-pdf-directory "C:/notes/bibliography/pdfs/")
+
+;;ORB
+(use-package org-roam-bibtex
+  :after org-roam
+  :hook (org-roam-mode . org-roam-bibtex-mode)
+  :bind (:map org-mode-map
+         (("C-c n a" . orb-note-actions))))
