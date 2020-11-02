@@ -127,6 +127,9 @@
 
        ))
 
+(after! flyspell
+  (setq flyspell-lazy-idle-seconds 2))
+
 ;;Ivy bibtex and org biblography
 
 (setq ivy-re-builders-alist
@@ -158,3 +161,17 @@
   :hook (org-roam-mode . org-roam-bibtex-mode)
   :bind (:map org-mode-map
          (("C-c n a" . orb-note-actions))))
+
+;;prolog
+(load! "lisp/prolog")
+(setq prolog-system 'swi
+      prolog-program-switches '((swi ("-G128M" "-T128M" "-L128M" "-O"))
+                                (t nil))
+      prolog-electric-if-then-else-flag t)
+(autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
+(add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
+(global-set-key (kbd "C-c l")
+                (lambda()
+                  (interactive)
+                  (insert ":- use_module(library()).")
+                  (forward-char -3)))

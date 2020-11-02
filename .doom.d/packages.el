@@ -13,12 +13,15 @@
 (package! org-ref)
 (package! ivy-bibtex)
 (package! org-roam-bibtex)
-
+(package! ediprolog)
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
 ;; https://github.com/raxod502/straight.el#the-recipe-format
 ;(package! another-package
 ;  :recipe (:host github :repo "username/repo"))
+
+;(package! prolog
+;  :recipe (:local-repo "prolog"))
 
 ;;(package! org-roam-server
   ;;:recipe (:host github :repo "org-roam/org-roam-server"))
